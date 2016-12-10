@@ -94,6 +94,7 @@ def faceCrop(imagePattern,boxScale=1):
             for face in faces:
                 croppedImage=imgCrop(pil_im, face[0],boxScale=boxScale)
                 fname,ext=os.path.splitext(img)
+                fname = fname.replace("female","female_cropped")
                 croppedImage.save(fname+'_crop'+str(n)+ext)
                 n+=1
         else:
@@ -120,4 +121,4 @@ def test(imageFilePath):
 
 # Crop all jpegs in a folder. Note: the code uses glob which follows unix shell rules.
 # Use the boxScale to scale the cropping area. 1=opencv box, 2=2x the width and height
-faceCrop('testPics/*.png',boxScale=1)
+faceCrop('female/*.jpg',boxScale=1)

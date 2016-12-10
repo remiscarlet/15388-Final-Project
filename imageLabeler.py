@@ -3,6 +3,7 @@ import os
 import PIL.Image
 import PIL.ImageTk
 import time
+import sys
 
 # events-example3.py
 # Demos timer, mouse, and keyboard events
@@ -14,26 +15,18 @@ from tkinter import *
 ####################################
 
 def init(data):
-    data.squareLeft = 50
-    data.squareTop = 50
-    data.squareFill = "yellow"
-    data.squareSize = 25
-    data.circleCenters = [ ]
-    data.counter = 0
-    data.headingRight = True
-    data.headingDown = True
-    data.isPaused = False
     data.timerDelay = 1000
+    data.images = os.listdir("male_cropped")
+    data.images = map(lambda path: "male_cropped/"+path, data.images)
     data.index = 1
     updateImage(data)
 
-def mousePressed(event, data):
-    newCircleCenter = (event.x, event.y)
-    data.circleCenters.append(newCircleCenter)
-
 def updateImage(data):
     cwd = os.path.abspath(os.path.dirname(__file__))
-    data.imagePath = cwd+("/testPics/image01_crop%d.png" % data.index)
+    if len(data.images) == 0:
+      sys.exit()
+    image = data.images.pop() 
+    data.imagePath = image
     image = PIL.Image.open(data.imagePath)
 
     data.index += 1
@@ -50,10 +43,14 @@ def keyPressed(event, data):
           logGender(data, None)
       updateImage(data)
 
-def logGender(data, doWhat):
-    if doWhat != None:
-      gender = "Female" if doWhat else "Male"
+f = open("males.txt", "w")
+
+def logGender(data, isFemale):
+    if isFemale != None:
+      gender = "Female" if isFemale else "Male"
       print data.imagePath + " is a " + gender 
+      if not isFemale:
+        f.write(data.imagePath+"\n")
     else:
       print "Image was not even of a face"
 
@@ -101,8 +98,6 @@ def run(width=500, height=500):
     canvas.pack()
 
     # set up events
-    root.bind("<Button-1>", lambda event:
-                            mousePressedWrapper(event, canvas, data))
     root.bind("<Key>", lambda event:
                             keyPressedWrapper(event, canvas, data))
     timerFiredWrapper(canvas, data)
