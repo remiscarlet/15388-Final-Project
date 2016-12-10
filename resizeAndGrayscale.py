@@ -42,7 +42,7 @@ def crop_and_scale_image(path, minimum=75):
 import os, sys
 
 basePath = "females_cleaned-v1/"
-newPath = basePath+"_normalized/"
+newPath = basePath[:-1]+"_normalized/"
 if not os.path.isdir(newPath):
   os.mkdir(newPath)
 validExt = ["png", "jpg"]
