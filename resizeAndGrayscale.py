@@ -1,17 +1,12 @@
 from PIL import Image
 import numpy as np
 
-def crop_and_scale_image(path, minimum=75):
-    """ Crops and scales a given image. 
-        Args: 
-            path (string) : path to image to be cropped and scaled
-        Returns: 
-            (PIL Image) : cropped and scaled image object
-    """
- 
-    print "Normalizing", path
-    im = Image.open(path)
-    
+def crop_and_scale_image(inp, minimum=75, isPath=True):
+    print "Normalizing", inp
+    if isPath:
+      im = Image.open(path)
+    else:
+      im = inp
 
     arr = np.asarray(im)
     width,height = len(arr[0]), len(arr)
@@ -40,21 +35,22 @@ def crop_and_scale_image(path, minimum=75):
     return cropped.resize((75,75), resample=Image.ANTIALIAS)
 
 import os, sys
+def main():
+  basePath = "females_cleaned-v1/"
+  newPath = basePath[:-1]+"_normalized/"
+  if not os.path.isdir(newPath):
+    os.mkdir(newPath)
+  validExt = ["png", "jpg"]
+  files = map(lambda path: basePath+path, os.listdir(basePath))
+  for filepath in files:
+    if filepath.split(".")[-1] in validExt:
+      changed = crop_and_scale_image(filepath)
+      if changed == None:
+        continue
+      newName = filepath.replace(basePath,newPath).split(".")
+      newName[-2] = newName[-2]+"_normalized"
+      newName = ".".join(newName)
+      changed.save(newName)
 
-basePath = "females_cleaned-v1/"
-newPath = basePath[:-1]+"_normalized/"
-if not os.path.isdir(newPath):
-  os.mkdir(newPath)
-validExt = ["png", "jpg"]
-files = map(lambda path: basePath+path, os.listdir(basePath))
-for filepath in files:
-  if filepath.split(".")[-1] in validExt:
-    changed = crop_and_scale_image(filepath)
-    if changed == None:
-      continue
-    newName = filepath.replace(basePath,newPath).split(".")
-    newName[-2] = newName[-2]+"_normalized"
-    newName = ".".join(newName)
-    changed.save(newName)
-
-
+if __name__ == "__main__":
+  main()

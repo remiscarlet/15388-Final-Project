@@ -70,36 +70,6 @@ def imgCrop(image, cropBox, boxScale=1):
 
     return image.crop(PIL_box)
 
-def faceCrop(imagePattern,boxScale=1):
-    # Select one of the haarcascade files:
-    #   haarcascade_frontalface_alt.xml  <-- Best one?
-    #   haarcascade_frontalface_alt2.xml
-    #   haarcascade_frontalface_alt_tree.xml
-    #   haarcascade_frontalface_default.xml
-    #   haarcascade_profileface.xml
-    
-    faceCascade = cv.Load('haarcascade_frontalface_alt.xml')
-
-    imgList=glob.glob(imagePattern)
-    if len(imgList)<=0:
-        print 'No Images Found'
-        return
-
-    for img in imgList:
-        pil_im=Image.open(img)
-        cv_im=pil2cvGrey(pil_im)
-        faces=DetectFace(cv_im,faceCascade)
-        if faces:
-            n=1
-            for face in faces:
-                croppedImage=imgCrop(pil_im, face[0],boxScale=boxScale)
-                fname,ext=os.path.splitext(img)
-                fname = fname.replace("female","female_cropped")
-                croppedImage.save(fname+'_crop'+str(n)+ext)
-                n+=1
-        else:
-            print 'No faces found:', img
-
 def test(imageFilePath):
     pil_im=Image.open(imageFilePath)
     cv_im=pil2cvGrey(pil_im)
@@ -121,4 +91,3 @@ def test(imageFilePath):
 
 # Crop all jpegs in a folder. Note: the code uses glob which follows unix shell rules.
 # Use the boxScale to scale the cropping area. 1=opencv box, 2=2x the width and height
-faceCrop('female/*.jpg',boxScale=1)
