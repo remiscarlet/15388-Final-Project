@@ -20,7 +20,7 @@ Download all files from the links section and place all in root directory.
 Should be able to run from there.
 
 ## Nbviewer
-<insert>
+http://nbviewer.jupyter.org/github/remiscarlet/15388-Final-Project/blob/master/Final%20Notebook.ipynb
 
 ## Links
 vgg16 Keras weights file  
