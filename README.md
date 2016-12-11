@@ -4,6 +4,8 @@
 - ytakamot
 - asegizek
 
+A previous group member, saholm, is no longer in this group.
+
 ##How To Run
 Python (2.7) dependencies:  
 OpenCV 2.4.x  
@@ -25,7 +27,7 @@ vgg16 Keras weights file
 https://drive.google.com/file/d/0Bz7KyqmuGsilT0J5dmRCM0ROVHc/view?usp=sharing
 
 Test images and output:  
-https://drive.google.com/open?id=0B6EKMiiV7JWyUk1fYTJFbVFnTnc
+https://drive.google.com/file/d/0B6EKMiiV7JWyOHB4ZHJZc1JjLTQ/view?usp=sharing
 
 Features and labels text files:  
 https://drive.google.com/open?id=0B6EKMiiV7JWyQWxVTlhiOE13NlE
