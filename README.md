@@ -21,10 +21,8 @@ Should be able to run from there.
 <insert>
 
 ## Links
-vgg16 Keras weights file
+vgg16 Keras weights file  
 https://drive.google.com/file/d/0Bz7KyqmuGsilT0J5dmRCM0ROVHc/view?usp=sharing
-
-###Links below must be accessed with an andrew.cmu.edu email account.
 
 Test images and output:  
 https://drive.google.com/open?id=0B6EKMiiV7JWyUk1fYTJFbVFnTnc
