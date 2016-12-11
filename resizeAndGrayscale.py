@@ -32,7 +32,7 @@ def crop_and_scale_image(inp, minimum=75, isPath=True):
     #print (left,top,right,bot)
     cropped = im.crop((left,top,right,bot))
     cropped = cropped.convert("L")
-    return cropped.resize((75,75), resample=Image.ANTIALIAS)
+    return cropped.resize((minimum,minimum), resample=Image.ANTIALIAS)
 
 import os, sys
 def main():
